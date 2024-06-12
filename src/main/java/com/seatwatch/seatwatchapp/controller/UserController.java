@@ -3,16 +3,18 @@ package com.seatwatch.seatwatchapp.controller;
 import com.seatwatch.seatwatchapp.dtos.user.UserCreationDTO;
 import com.seatwatch.seatwatchapp.dtos.user.UserDTO;
 import com.seatwatch.seatwatchapp.dtos.user.UserUpdateDTO;
-import com.seatwatch.seatwatchapp.model.User;
 import com.seatwatch.seatwatchapp.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -41,6 +43,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    // TODO: Should figure out how to catch MethodArgNotValid Exception
     /**
      * Creates a new user from the given user information
      * @param userCreationDTO   New user information
@@ -51,17 +54,41 @@ public class UserController {
         try {
             UserDTO userDTO = userService.createUser(userCreationDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(userCreationDTO);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> updateUser(@PathVariable Long id,
-//                                        @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
-//
-//    }
+    // TODO: Should figure out how to catch MethodArgNotValid Exception
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id,
+                                        @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
+        try {
+            UserDTO userDTO = userService.updateUser(id, userUpdateDTO);
+            return ResponseEntity.ok().body(userDTO);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userUpdateDTO);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 }

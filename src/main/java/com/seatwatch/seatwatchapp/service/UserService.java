@@ -5,16 +5,13 @@ import com.seatwatch.seatwatchapp.dtos.user.UserDTO;
 import com.seatwatch.seatwatchapp.dtos.user.UserUpdateDTO;
 import com.seatwatch.seatwatchapp.model.User;
 import com.seatwatch.seatwatchapp.repository.UserRepository;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -61,13 +58,39 @@ public class UserService {
     }
 
     public UserDTO createUser(UserCreationDTO userCreationDTO) {
+        if (userRepository.existsByEmail(userCreationDTO.getEmail())) {
+            throw new IllegalStateException("Email already in use");
+        }
+        if (userRepository.existsByUsername(userCreationDTO.getUsername())) {
+            throw new IllegalStateException("Username already in use");
+        }
         User user = toUserEntity(userCreationDTO);
         userRepository.save(user);
         return toUserDTO(user);
     }
 
-//    public User updateUser(Long id, @Valid UserUpdateDTO userUpdateDTO) {
-//
-//    }
+    public UserDTO updateUser(Long id, UserUpdateDTO userUpdateDTO) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPassword(userUpdateDTO.getPassword());
+            user.setEmail(userUpdateDTO.getEmail());
+            if (userUpdateDTO.getPhoneNumber() != null) {
+                user.setPhoneNumber(userUpdateDTO.getPhoneNumber());
+            }
+            userRepository.save(user);
+            return toUserDTO(user);
+        }
+        throw new NoSuchElementException("User not found");
+    }
+
+    public void deleteUser(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            userRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException("User not found");
+        }
+    }
 
 }
