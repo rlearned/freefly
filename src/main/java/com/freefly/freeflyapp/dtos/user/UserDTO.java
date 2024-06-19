@@ -1,4 +1,4 @@
-package com.seatwatch.seatwatchapp.dtos.user;
+package com.freefly.freeflyapp.dtos.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

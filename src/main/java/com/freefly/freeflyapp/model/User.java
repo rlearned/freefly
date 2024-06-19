@@ -1,4 +1,4 @@
-package com.seatwatch.seatwatchapp.model;
+package com.freefly.freeflyapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

@@ -1,12 +1,11 @@
-package com.seatwatch.seatwatchapp.service;
+package com.freefly.freeflyapp.service;
 
-import com.seatwatch.seatwatchapp.dtos.user.UserCreationDTO;
-import com.seatwatch.seatwatchapp.dtos.user.UserDTO;
-import com.seatwatch.seatwatchapp.dtos.user.UserUpdateDTO;
-import com.seatwatch.seatwatchapp.model.User;
-import com.seatwatch.seatwatchapp.repository.UserRepository;
+import com.freefly.freeflyapp.dtos.user.UserDTO;
+import com.freefly.freeflyapp.dtos.user.UserUpdateDTO;
+import com.freefly.freeflyapp.model.User;
+import com.freefly.freeflyapp.repository.UserRepository;
+import com.freefly.freeflyapp.dtos.user.UserCreationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

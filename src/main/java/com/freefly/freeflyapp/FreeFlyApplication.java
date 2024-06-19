@@ -1,13 +1,13 @@
-package com.seatwatch.seatwatchapp;
+package com.freefly.freeflyapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SeatWatchApplication {
+public class FreeFlyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SeatWatchApplication.class, args);
+		SpringApplication.run(FreeFlyApplication.class, args);
 	}
 
 }

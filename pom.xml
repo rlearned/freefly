@@ -8,11 +8,11 @@
 		<version>3.3.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.seatwatch</groupId>
-	<artifactId>seatwatch-app</artifactId>
+	<groupId>com.freefly</groupId>
+	<artifactId>freefly-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SeatWatch</name>
-	<description>A Spring Boot application that monitors flight seat availability and notifies users of upgrades via email or SMS</description>
+	<name>FreeFly</name>
+	<description>A Spring Boot application that finds award flight availability and can notify users via email or SMS</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

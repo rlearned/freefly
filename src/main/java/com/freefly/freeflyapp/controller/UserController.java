@@ -1,16 +1,14 @@
-package com.seatwatch.seatwatchapp.controller;
+package com.freefly.freeflyapp.controller;
 
-import com.seatwatch.seatwatchapp.dtos.user.UserCreationDTO;
-import com.seatwatch.seatwatchapp.dtos.user.UserDTO;
-import com.seatwatch.seatwatchapp.dtos.user.UserUpdateDTO;
-import com.seatwatch.seatwatchapp.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
+import com.freefly.freeflyapp.dtos.user.UserDTO;
+import com.freefly.freeflyapp.dtos.user.UserCreationDTO;
+import com.freefly.freeflyapp.dtos.user.UserUpdateDTO;
+import com.freefly.freeflyapp.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
