@@ -16,12 +16,12 @@ public class Route {
 
     @Column
     @NotBlank
-    @Size(min = 3, max = 3)
+    @Size(min = 3)
     private String originAirport;
 
     @Column
     @NotBlank
-    @Size(min = 3, max = 3)
+    @Size(min = 3)
     private String destinationAirport;
 
     @Column
