@@ -25,13 +25,14 @@ public class Route {
     private String destinationAirport;
 
     @Column
+    @NotBlank
     private String destinationRegion;
 
-    @Column
+    @Column(nullable = false)
     @Min(0)
     private int numDaysOut;
 
-    @Column
+    @Column(nullable = false)
     @Min(0)
     private int distance;
 
