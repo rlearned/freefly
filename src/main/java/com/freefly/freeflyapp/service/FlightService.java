@@ -1,5 +1,4 @@
 package com.freefly.freeflyapp.service;
-
 import com.freefly.freeflyapp.model.Flight;
 import com.freefly.freeflyapp.model.Route;
 import com.freefly.freeflyapp.repository.FlightRepository;
@@ -19,4 +18,3 @@ public class FlightService {
     public List<Flight> getFlights(Route route) {
 
     }
-}
