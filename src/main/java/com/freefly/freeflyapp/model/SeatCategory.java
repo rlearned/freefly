@@ -4,5 +4,5 @@ public enum SeatCategory {
     Y, // Economy
     W, // Premium Economy
     J, // Business
-    F; // First Clsas
+    F; // First Class
 }
