@@ -77,6 +77,7 @@ public class UserController {
         }
     }
 
+    // correct exceptions?
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         try {
