@@ -1,2 +1,4 @@
-package com.freefly.freeflyapp.dtos.user;public class RouteDTO {
+package com.freefly.freeflyapp.dtos.user;
+
+public class RouteDTO {
 }
